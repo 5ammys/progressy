@@ -6,7 +6,7 @@ import Sidebar from "@/components/Sidebar"
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Resumen de Carrera",
+  title: "Progressy",
   description: "Seguimiento de materias universitarias",
 };
 
