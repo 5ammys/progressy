@@ -31,12 +31,12 @@ export default function MapaPage() {
       materiasByYear[materia.anio].push(materia);
     });
 
-    const nodeSpacingX = 300; 
-    const nodeSpacingY = 120; 
-    const maxSubjectsPerColumn = 7; 
-    const startX = 50;
+    const nodeSpacingX = 300;
+    const nodeSpacingY = 120;
+    const maxSubjectsPerColumn = 7;
+    const startX = 0;
 
-    let currentColumnIndex = 0; 
+    let currentColumnIndex = 0;
 
     Object.entries(materiasByYear).forEach(([year, materiasInYear]) => {
       const yearNum = parseInt(year);
@@ -135,7 +135,7 @@ export default function MapaPage() {
         </div>
       </div>
 
-      
+
       <div className="absolute top-24 right-4 z-10 bg-gray-800/95 border border-slate-400 rounded-lg p-4 shadow-lg">
         <h3 className="text-lg font-semibold text-slate-300 mb-3">Leyenda</h3>
         <div className="space-y-2">
@@ -164,11 +164,10 @@ export default function MapaPage() {
           edges={edges}
           onNodesChange={onNodesChange}
           onEdgesChange={onEdgesChange}
-          fitView
-          attributionPosition="bottom-left"
-          minZoom={0.4}
+          proOptions={{ hideAttribution: true }}
+          minZoom={0.2}
           maxZoom={2}
-          defaultViewport={{ x: 0, y: 0, zoom: 1.5 }}
+          defaultViewport={{ x: 25, y: 220, zoom: 0.4 }}
         >
           <Background color="#475569" gap={16} />
           <Controls className="bg-gray-800 border border-slate-400" />
