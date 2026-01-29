@@ -16,7 +16,6 @@ export default function Sidebar() {
 
   return (
     <>
-      {/* Mobile Toggle Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="fixed top-4 right-4 z-50 p-2 bg-slate-800 text-white rounded-lg lg:hidden"
@@ -24,7 +23,7 @@ export default function Sidebar() {
         {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
       </button>
 
-      {/* Overlay for mobile */}
+
       {isOpen && (
         <div
           className="fixed inset-0 bg-black/50 z-40 lg:hidden"
@@ -32,7 +31,6 @@ export default function Sidebar() {
         />
       )}
 
-      {/* Sidebar */}
       <aside
         className={`w-64 h-screen bg-slate-900 text-white flex flex-col fixed left-0 top-0 border-r border-slate-800 z-50 transition-transform duration-300 ${isOpen ? "translate-x-0" : "-translate-x-full"
           } lg:translate-x-0`}
@@ -53,7 +51,7 @@ export default function Sidebar() {
               <Link
                 key={item.path}
                 href={item.path}
-                onClick={() => setIsOpen(false)} // Close sidebar on click (mobile)
+                onClick={() => setIsOpen(false)} // Cerrar sidebar al hacer clic
                 className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 ${isActive
                   ? "bg-emerald-600 text-white shadow-lg shadow-emerald-900/20"
                   : "text-slate-400 hover:bg-slate-800 hover:text-white"

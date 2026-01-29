@@ -1,11 +1,13 @@
 "use client";
 import { useState } from "react";
 import { useAcademicStore } from "@/store/useAcademicStore";
-import { EstadoMateria, FormaAprobacion } from "@/types";
+import { EstadoMateria, FormaAprobacion, Materia } from "@/types";
+import { Pencil, X } from "lucide-react";
 
 export default function MateriasPage() {
   const { materias, actualizarMateria } = useAcademicStore();
   const [selectedYear, setSelectedYear] = useState<number | null>(null);
+  const [editingMateria, setEditingMateria] = useState<Materia | null>(null);
 
   const filteredMaterias = selectedYear
     ? materias.filter(materia => materia.anio === selectedYear)
@@ -13,6 +15,95 @@ export default function MateriasPage() {
 
   return (
     <div className="p-8 max-w-6xl mx-auto">
+
+      {editingMateria && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+          <div className="bg-gray-800 rounded-xl p-6 w-full max-w-sm border border-slate-600 shadow-2xl">
+            <div className="flex justify-between items-start mb-4">
+              <div>
+                <h3 className="text-xl font-bold text-slate-100">{editingMateria.nombre}</h3>
+                <p className="text-sm text-slate-400">ID: {editingMateria.id}</p>
+              </div>
+              <button
+                onClick={() => setEditingMateria(null)}
+                className="text-slate-400 hover:text-white"
+              >
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-slate-300 mb-1">Estado</label>
+                <select
+                  value={editingMateria.estado}
+                  onChange={(e) => {
+                    const newStatus = e.target.value as EstadoMateria;
+                    actualizarMateria(editingMateria.id, { estado: newStatus });
+                    setEditingMateria({ ...editingMateria, estado: newStatus });
+                  }}
+                  className="w-full p-2 rounded-lg bg-slate-900 border border-slate-600 text-slate-200"
+                >
+                  <option value="pendiente">Pendiente</option>
+                  <option value="cursando">Cursando</option>
+                  <option value="regularizada">Regularizada</option>
+                  <option value="aprobada">Aprobada</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-slate-300 mb-1">Nota</label>
+                <input
+                  type="number"
+                  disabled={editingMateria.estado !== 'aprobada' && editingMateria.estado !== 'regularizada'}
+                  value={editingMateria.nota || ''}
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    const num = parseFloat(val);
+                    if (val === '') {
+                      actualizarMateria(editingMateria.id, { nota: null });
+                      setEditingMateria({ ...editingMateria, nota: null });
+                      return;
+                    }
+                    if (!isNaN(num)) {
+                      actualizarMateria(editingMateria.id, { nota: num });
+                      setEditingMateria({ ...editingMateria, nota: num });
+                    }
+                  }}
+                  className="w-full p-2 rounded-lg bg-slate-900 border border-slate-600 text-slate-200 disabled:opacity-50"
+                  placeholder="-"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-slate-300 mb-1">Forma Aprobación</label>
+                <select
+                  disabled={editingMateria.estado !== 'aprobada'}
+                  value={editingMateria.formaAprobacion || ''}
+                  onChange={(e) => {
+                    const forma = e.target.value as FormaAprobacion;
+                    actualizarMateria(editingMateria.id, { formaAprobacion: forma });
+                    setEditingMateria({ ...editingMateria, formaAprobacion: forma });
+                  }}
+                  className="w-full p-2 rounded-lg bg-slate-900 border border-slate-600 text-slate-200 disabled:opacity-50"
+                >
+                  <option value="pendiente">Seleccionar...</option>
+                  <option value="Promocion">Promoción</option>
+                  <option value="Final">Final</option>
+                  <option value="Libre">Libre</option>
+                </select>
+              </div>
+            </div>
+
+            <button
+              onClick={() => setEditingMateria(null)}
+              className="mt-6 w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-lg transition-colors"
+            >
+              Listo
+            </button>
+          </div>
+        </div>
+      )}
 
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-300">Programa de la Carrera</h1>
@@ -48,11 +139,11 @@ export default function MateriasPage() {
           <table className="w-full text-left border-collapse">
             <thead>
               <tr className="bg-slate-700 border-b border-slate-400 text-xs uppercase tracking-wider text-slate-200 font-semibold">
-
                 <th className="p-4">Materia</th>
-                <th className="p-4 w-40">Estado</th>
-                <th className="p-4 w-24">Nota</th>
-                <th className="p-4 w-40">Forma Aprob.</th>
+                <th className="p-4 w-40 hidden md:table-cell">Estado</th>
+                <th className="p-4 w-24 hidden md:table-cell">Nota</th>
+                <th className="p-4 w-40 hidden md:table-cell">Forma Aprob.</th>
+                <th className="p-4 w-16 md:hidden">Editar</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-500">
@@ -65,9 +156,22 @@ export default function MateriasPage() {
                     <td className="p-4">
                       <div className="font-medium text-slate-200">{materia.nombre}</div>
                       <div className="text-xs text-slate-400 mt-0.5">ID: {materia.id}</div>
+
+                      <div className="md:hidden mt-2 flex items-center gap-2">
+                        <span className={`text-xs px-2 py-0.5 rounded-full ${materia.estado === 'aprobada' ? 'bg-emerald-900/50 text-emerald-400' :
+                          materia.estado === 'cursando' ? 'bg-blue-900/50 text-blue-400' :
+                            materia.estado === 'regularizada' ? 'bg-purple-900/50 text-purple-400' :
+                              'bg-slate-700 text-slate-400'
+                          }`}>
+                          {materia.estado.charAt(0).toUpperCase() + materia.estado.slice(1)}
+                        </span>
+                        {materia.nota && (
+                          <span className="text-xs font-bold text-slate-300">Nota: {materia.nota}</span>
+                        )}
+                      </div>
                     </td>
 
-                    <td className="p-4">
+                    <td className="p-4 hidden md:table-cell">
                       <select
                         value={materia.estado}
                         onChange={(e) =>
@@ -90,7 +194,7 @@ export default function MateriasPage() {
                       </select>
                     </td>
 
-                    <td className="p-4">
+                    <td className="p-4 hidden md:table-cell">
                       <input
                         type="number"
                         min={
@@ -145,7 +249,7 @@ export default function MateriasPage() {
                       />
                     </td>
 
-                    <td className="p-4">
+                    <td className="p-4 hidden md:table-cell">
                       <select
                         disabled={!isAprobada}
                         value={materia.formaAprobacion || ''}
@@ -173,6 +277,15 @@ export default function MateriasPage() {
                         <option value="Final">Final</option>
                         <option value="Libre">Libre</option>
                       </select>
+                    </td>
+
+                    <td className="p-4 md:hidden">
+                      <button
+                        onClick={() => setEditingMateria(materia)}
+                        className="p-2 bg-slate-700 text-slate-300 rounded-lg hover:bg-slate-600 hover:text-white transition-colors"
+                      >
+                        <Pencil className="w-4 h-4" />
+                      </button>
                     </td>
 
                   </tr>

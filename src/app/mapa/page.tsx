@@ -22,7 +22,7 @@ export default function MapaPage() {
     const nodes: Node[] = [];
     const edges: Edge[] = [];
 
-    // Gropo de materias por año
+    // Grupo de materias por año
     const materiasByYear: { [key: number]: typeof materias } = {};
     materias.forEach(materia => {
       if (!materiasByYear[materia.anio]) {
