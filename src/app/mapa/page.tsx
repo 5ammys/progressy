@@ -124,9 +124,8 @@ export default function MapaPage() {
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
   return (
-    <div className="h-screen bg-gray-900 relative">
-
-      <div className="absolute top-0 left-0 right-0 z-10 bg-gray-800/95 border-b border-slate-400 p-4">
+    <div className="h-dvh bg-gray-900 flex flex-col relative overflow-hidden">
+      <div className="relative z-10 bg-gray-800/95 border-b border-slate-400 p-4 shrink-0">
         <div className="max-w-7xl mx-auto">
           <h1 className="text-2xl font-bold text-gray-300">Mapa de Correlatividades</h1>
           <p className="text-slate-500 text-sm mt-1">
@@ -135,30 +134,29 @@ export default function MapaPage() {
         </div>
       </div>
 
-
-      <div className="absolute bottom-4 left-4 z-10 hidden md:block bg-gray-800/95 border border-slate-400 rounded-lg p-4 shadow-lg">
-        <h3 className="text-lg font-semibold text-slate-300 mb-3">Leyenda</h3>
-        <div className="space-y-2">
-          <div className="flex items-center gap-2">
-            <div className="w-4 h-4 rounded" style={{ background: '#10b981' }}></div>
-            <span className="text-base text-slate-300">Aprobada</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="w-4 h-4 rounded" style={{ background: '#3b82f6' }}></div>
-            <span className="text-base text-slate-300">Cursando</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="w-4 h-4 rounded" style={{ background: '#f59e0b' }}></div>
-            <span className="text-base text-slate-300">Disponible</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="w-4 h-4 rounded" style={{ background: '#64748b' }}></div>
-            <span className="text-base text-slate-300">Bloqueada</span>
+      <div className="flex-1 w-full relative min-h-0">
+        <div className="absolute bottom-4 left-4 z-10 bg-gray-800/95 border border-slate-400 rounded-lg p-3 shadow-lg max-w-[150px] md:max-w-none">
+          <h3 className="text-sm font-semibold text-slate-300 mb-2">Leyenda</h3>
+          <div className="space-y-1.5">
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 rounded" style={{ background: '#10b981' }}></div>
+              <span className="text-xs md:text-sm text-slate-300">Aprobada</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 rounded" style={{ background: '#3b82f6' }}></div>
+              <span className="text-xs md:text-sm text-slate-300">Cursando</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 rounded" style={{ background: '#f59e0b' }}></div>
+              <span className="text-xs md:text-sm text-slate-300">Disponible</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 rounded" style={{ background: '#64748b' }}></div>
+              <span className="text-xs md:text-sm text-slate-300">Bloqueada</span>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div className="w-full h-dvh pt-20">
         <ReactFlow
           nodes={nodes}
           edges={edges}
@@ -170,10 +168,13 @@ export default function MapaPage() {
           defaultViewport={{ x: 25, y: 220, zoom: 0.4 }}
         >
           <Background color="#475569" gap={16} />
-          <Controls position="top-right" className="bg-gray-800 border border-slate-400 text-white" />
+          <Controls
+            position="top-right"
+            className="bg-gray-800 border border-slate-400 text-white m-4"
+          />
           <MiniMap
             position="bottom-right"
-            className="bg-gray-800 border border-slate-400"
+            className="bg-gray-800 border border-slate-400 m-4"
             nodeColor={(node) => {
               const style = node.style as { background?: string };
               return style?.background || '#64748b';
