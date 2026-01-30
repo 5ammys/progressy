@@ -165,7 +165,7 @@ export default function MapaPage() {
           proOptions={{ hideAttribution: true }}
           minZoom={0.2}
           maxZoom={2}
-          defaultViewport={{ x: 25, y: 220, zoom: 0.4 }}
+          defaultViewport={{ x: 20, y: 220, zoom: 0.5 }}
         >
           <Background color="#475569" gap={16} />
           <Controls
