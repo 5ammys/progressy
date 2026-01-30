@@ -136,7 +136,7 @@ export default function MapaPage() {
       </div>
 
 
-      <div className="absolute top-24 right-4 z-10 bg-gray-800/95 border border-slate-400 rounded-lg p-4 shadow-lg">
+      <div className="absolute bottom-4 left-4 z-10 hidden md:block bg-gray-800/95 border border-slate-400 rounded-lg p-4 shadow-lg">
         <h3 className="text-lg font-semibold text-slate-300 mb-3">Leyenda</h3>
         <div className="space-y-2">
           <div className="flex items-center gap-2">
@@ -158,7 +158,7 @@ export default function MapaPage() {
         </div>
       </div>
 
-      <div className="h-full w-full pt-20">
+      <div className="w-full h-[100dvh] pt-20">
         <ReactFlow
           nodes={nodes}
           edges={edges}
@@ -170,8 +170,9 @@ export default function MapaPage() {
           defaultViewport={{ x: 25, y: 220, zoom: 0.4 }}
         >
           <Background color="#475569" gap={16} />
-          <Controls className="bg-gray-800 border border-slate-400" />
+          <Controls position="top-right" className="bg-gray-800 border border-slate-400 text-white" />
           <MiniMap
+            position="bottom-right"
             className="bg-gray-800 border border-slate-400"
             nodeColor={(node) => {
               const style = node.style as { background?: string };

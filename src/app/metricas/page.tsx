@@ -35,15 +35,15 @@ export default function MetricasPage() {
     : 0;
 
   return (
-    <div className="p-8 max-w-7xl mx-auto">
-      
+    <div className="w-full p-4 md:p-8 max-w-7xl mx-auto">
+
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-300">Métricas Académicas</h1>
         <p className="text-slate-500 mt-2">Visualiza tu progreso y estadísticas de la carrera</p>
       </div>
-      
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
-        
+
         <div className="bg-gray-800 border border-slate-400 rounded-xl p-6 shadow-lg">
           <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-2">
             Promedio Ponderado
@@ -58,7 +58,7 @@ export default function MetricasPage() {
             Calculado con {progressStats.aprobadas} materias aprobadas
           </p>
         </div>
-    
+
         <div className="bg-gray-800 border border-slate-400 rounded-xl p-6 shadow-lg">
           <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-2">
             Progreso General
@@ -87,7 +87,7 @@ export default function MetricasPage() {
             </div>
           </div>
         </div>
-        
+
         <div className="bg-gray-800 border border-slate-400 rounded-xl p-6 shadow-lg">
           <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-2">
             Total de Materias
@@ -155,7 +155,7 @@ export default function MetricasPage() {
             </div>
           )}
         </div>
-       
+
         <div className="bg-gray-800 border border-slate-400 rounded-xl p-6 shadow-lg">
           <h3 className="text-lg font-semibold text-slate-300 mb-4">
             Progreso por Año
