@@ -35,7 +35,7 @@ export default function MetricasPage() {
     : 0;
 
   return (
-    <div className="w-full p-4 md:p-8 max-w-7xl mx-auto">
+    <div className="w-full max-w-[100vw] overflow-x-hidden p-4 md:p-8 md:max-w-7xl mx-auto">
 
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-300">Métricas Académicas</h1>
@@ -88,7 +88,7 @@ export default function MetricasPage() {
           </div>
         </div>
 
-        <div className="bg-gray-800 border border-slate-400 rounded-xl p-6 shadow-lg">
+        <div className="bg-gray-800 border border-slate-400 rounded-xl p-6 shadow-lg overflow-hidden min-w-0">
           <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-2">
             Total de Materias
           </h3>

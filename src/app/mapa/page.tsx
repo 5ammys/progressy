@@ -158,7 +158,7 @@ export default function MapaPage() {
         </div>
       </div>
 
-      <div className="w-full h-[100dvh] pt-20">
+      <div className="w-full h-dvh pt-20">
         <ReactFlow
           nodes={nodes}
           edges={edges}
