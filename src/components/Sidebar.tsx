@@ -35,13 +35,11 @@ export default function Sidebar() {
         className={`w-64 h-screen bg-slate-900 text-white flex flex-col fixed left-0 top-0 border-r border-slate-800 z-50 transition-transform duration-300 ${isOpen ? "translate-x-0" : "-translate-x-full"
           } lg:translate-x-0`}
       >
-        <div className="p-6 flex items-center gap-3 border-b border-slate-800">
-          <GraduationCap className="w-8 h-8 text-emerald-400" />
-          <div>
-            <h1 className="font-bold text-xl leading-tight text-white">
-              Gradual
-            </h1>
-          </div>
+        <div className="p-6 flex items-center gap-2 border-b border-slate-800">
+          <img src="/logo.svg" alt="Gradual" className="w-8 h-8 mt-[-6px]" />
+          <h1 className="font-bold text-xl leading-tight text-white">
+            Gradual
+          </h1>
         </div>
 
         <nav className="flex-1 px-3 py-6 space-y-2">
