@@ -39,7 +39,7 @@ export default function Sidebar() {
           <GraduationCap className="w-8 h-8 text-emerald-400" />
           <div>
             <h1 className="font-bold text-xl leading-tight text-white">
-              Progressy
+              Gradual
             </h1>
           </div>
         </div>
