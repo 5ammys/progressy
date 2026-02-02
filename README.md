@@ -1,36 +1,31 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Como estudiante de Ingeniería, deseaba tener una visión clara de mi progreso en un entorno moderno, simple y elegante. Así que, decidí construir mi propia solución.
 
-## Getting Started
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Les presento Gradual 🎓.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Es una plataforma que transforma tu plan de estudios en un mapa interactivo.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+🚀 ¿Qué hace diferente a Gradual?
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Gestión de materias: Puedes describirle que materias aprobaste, con cual nota y si fué mediante promoción, final o libre.
 
-## Learn More
+- Árbol de Correlatividades: Visualiza gráficamente qué materias se desbloquean al aprobar una materias.
 
-To learn more about Next.js, take a look at the following resources:
+- Métricas en Tiempo Real: Dashboard estilo "Bento Grid" que calcula tu promedio ponderado y porcentaje de avance al instante.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+Tech Stack (Desarrollado con una arquitectura moderna y escalable):
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Frontend: Next.js 14 con TypeScript.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Estado: Zustand para una gestión de estado global.
+
+Visualización: React Flow para el renderizado de grafos.
+
+Estilos: Tailwind CSS.
+
+
+
+Gradual es un MVP desarrollado en Next.js enfocado en la experiencia de usuario y validación del flujo de seguimiento académico. Actualmente utiliza estado local como prueba de concepto, con arquitectura pensada para incorporar backend, API y base de datos cuando el producto escale.
